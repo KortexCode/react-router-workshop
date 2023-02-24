@@ -4,6 +4,7 @@ import { Outlet, useNavigation } from "react-router-dom";
 function Layout(){
 
     const navigation = useNavigation();
+  
     return(
        <>
         <Menu className="container"></Menu>

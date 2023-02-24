@@ -1,18 +1,24 @@
 import React, { useReducer } from "react";
-import { Link } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 import { useAuth } from "../components/auth";
 
 function LonginPage(){
+    
     const auth = useAuth();
+   
+    if(auth.username){
+       return <Navigate to="/"></Navigate>
+    }
+
     const [inputText, setInputText]  = React.useState("");
    
     const handleTextChange = (event)=>{
         setInputText(event.target.value)
     }
     const handleLogin = ()=>{
-        auth.login();
+        auth.login(inputText);
     }
-
+    
     return(
         <div className="ps-2">
             <h1 className="text-center">LOGIN PAGE</h1>

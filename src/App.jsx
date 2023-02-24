@@ -5,7 +5,7 @@ import {
   RouterProvider,
 } from "react-router-dom";
 import { Layout } from './pages/Layout';
-import { AuthProvider, useAuth } from './components/auth';
+import { AuthProvider, AuthRoute } from './components/auth';
 import { HomePage } from './pages/HomePage';
 import { BlogPage } from './pages/BlogPage'; 
 import { ProfilePage } from './pages/ProfilePage';
@@ -36,17 +36,22 @@ const router = createHashRouter([
           },
           {
             path: "/logout",
-            element:<LogoutPage/>,
+            element:(
+            <AuthRoute>
+              <LogoutPage/>
+            </AuthRoute>),
           },
           {
             path: "/profile",
-            element:<ProfilePage/>,
+            element:(
+              <AuthRoute>
+                <ProfilePage/>
+              </AuthRoute>), 
           },
           {
             path: "/blog",
             element:<BlogPage/>,
             loader:postLoader,
-
           },
           {
             path: "/blog-post/:slug",

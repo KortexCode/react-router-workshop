@@ -4,7 +4,6 @@ import { useLoaderData, useNavigate } from "react-router-dom";
 function BlogPost(){
     const navigation = useNavigate(); //hook para la navegación
     const user = useLoaderData(); //Cargar datos de una API
-
     /* const {slug} = useParams();  //hook para traer el parámetro slug dela url
     const user = data.find(user => user.id == slug)
  */

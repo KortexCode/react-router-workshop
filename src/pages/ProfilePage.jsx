@@ -1,11 +1,13 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import {useAuth, } from "../components/auth";
+
 
 function ProfilePage(){
-
+    const auth = useAuth();
     return(
         <>
-        <p className="text-center">Soy ProfilePage</p>
+            <h1 className="text-center">Profile</h1>
+            <p className="text-center">Hola, {auth.username}</p>
         </>
     )
 }
