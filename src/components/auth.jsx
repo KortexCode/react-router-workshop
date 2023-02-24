@@ -1,7 +1,16 @@
 import React from "react";
 import { Outlet, useNavigate, Navigate } from "react-router-dom";
 
-
+const rolesList = [
+    {
+        role:"admin",
+        name:["Homura", "Jotaro"],
+    },
+    {
+        role:"author",
+        name:["Ervin Howell", "Kurtis Weissnat"],
+    }
+]
 
 const AuthContext = React.createContext();
 
@@ -18,7 +27,7 @@ function AuthProvider(){
         setUsername(null);
     
     }
-    const auth = {username, login, logout};
+    const auth = {username, login, logout, rolesList};
     return(
         <AuthContext.Provider value={auth}>
             <Outlet></Outlet>
