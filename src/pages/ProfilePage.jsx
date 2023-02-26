@@ -1,13 +1,10 @@
 import React from "react";
-import {useAuth, } from "../components/auth";
 
-
-function ProfilePage(){
-    const auth = useAuth();
+function ProfilePage(props){
     return(
         <>
             <h1 className="text-center">Profile</h1>
-            <p className="text-center">Hola, {auth.username}</p>
+            <p className="text-center">Hola, {props.username}</p>
         </>
     )
 }

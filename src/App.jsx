@@ -5,11 +5,13 @@ import {
   RouterProvider,
 } from "react-router-dom";
 import { Layout } from './pages/Layout';
-import { AuthProvider, AuthRoute} from './components/auth';
+import { Menu } from "../components/Menu";
+import { AuthRoute } from './components/AuthRoute';
 import { HomePage } from './pages/HomePage';
 import { BlogPage } from './pages/BlogPage'; 
 import { ProfilePage } from './pages/ProfilePage';
 import { ErrorPage } from './pages/ErrorPage';
+import { BlogLinks } from './components/BlogLinks';
 import { postLoader } from './pages/BlogPage';
 import { BlogPost } from './pages/BlogPost';
 import { loaderBlogPost } from './pages/BlogPost';
@@ -20,62 +22,73 @@ import { useAuth } from './hooks/useAuth';
 
 function App() {
 
- /*  const {state} = useAuth(); */
+  const {
+    username,
+    activedDeletePost, 
+    idToDelete,
+    rolesList,
+    login,
+    logout,
+    activedDelete,
+  } = useAuth();
 
   const router = createHashRouter([
-    { 
-      element: <AuthProvider/>,
-      children:[
-        {  
+    {  
+      path: "/",
+      element:(
+      <Layout>
+        <Menu username={username} />
+      </Layout>),
+      errorElement: <ErrorPage/>,
+      children:[  
+        {
+          index:true,
           path: "/",
-          element:<Layout/>,
-          errorElement: <ErrorPage/>,
-          children:[  
-            {
-              index:true,
-              path: "/",
-              element:<HomePage className="container"/>,
-            },
-            {
-              path: "/login",
-              element:<LonginPage/>,
-            },
-            {
-              path: "/logout",
-              element:(
-              <AuthRoute>
-                <LogoutPage/>
-              </AuthRoute>),
-            },
-            {
-              path: "/profile",
-              element:(
-                <AuthRoute>
-                  <ProfilePage/>
-                </AuthRoute>), 
-            },
-            {
-              path: "/blog",
-              element:<BlogPage/>,
-              loader:postLoader,
-            },
-            {
-              path: "/blog-post/:slug",
-              element:<BlogPost/>,
-              loader:loaderBlogPost,  
-            },
+          element:<HomePage className="container"/>,
+        },
+        {
+          path: "/login",
+          element:<LonginPage username={username} login={login}/>,
+        },
+        {
+          path: "/logout",
+          element:(
+          <AuthRoute username={username}>
+            <LogoutPage logout={logout}/>
+          </AuthRoute>),
+        },
+        {
+          path: "/profile",
+          element:(
+            <AuthRoute username={username}>
+              <ProfilePage username={username}/>
+            </AuthRoute>), 
+        },
+        {
+          path: "/blog",
+          element:<BlogPage/>,
+          loader:postLoader,
+          children:[{
+            element:<BlogLinks activedDeletePost={activedDeletePost}
+            idToDelete={idToDelete}/>,
+            loader:postLoader,
+          }
           ]
-        } 
+        },
+        {
+          path: "/blog-post/:slug",
+          element:<BlogPost username={username} activedDelete={activedDelete}
+          rolesList={rolesList}/>,
+          loader:loaderBlogPost,  
+        },
       ]
-    },
+    } 
   ])
-
   return (
     <React.Fragment>
       <RouterProvider router={router}/>
     </React.Fragment>
-
-)
+  )
 }
 
 export default App

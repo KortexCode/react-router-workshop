@@ -1,13 +1,9 @@
 import React from "react";
-import { Link } from "react-router-dom";
-import { useAuth} from "../components/auth";
 
-function LogoutPage(){
-    const auth = useAuth();
+function LogoutPage(props){
     const handleLogout = ()=>{
-        auth.logout();
+        props.logout();
     }
-
     return(
         <>
             <h1 className="text-center">LOGIN PAGE</h1>

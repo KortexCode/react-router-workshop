@@ -1,13 +1,12 @@
-import { Link } from "react-router-dom"
-import { useAuth } from "./auth"
+import { Link, useLoaderData } from "react-router-dom"
 
 function BlogLinks(props){
-
-    const auth = useAuth();
+    const userData = useLoaderData();//cargamos los datos de la API
+    //Se hay una orden para borrar un post se busca el id de ese post 
     let id = null;
-    if(auth.activedDeletePost){
-       props.userData.map(user =>{
-            if(user.id === auth.idToDelete){
+    if(props.activedDeletePost){
+       userData.map(user =>{
+            if(user.id === props.idToDelete){
                 console.log(user.id)
                 id = user.id;
             }           
@@ -16,7 +15,7 @@ function BlogLinks(props){
     return (
         <ul>
             {
-               props.userData.map(user =>{
+               userData.map(user =>{
                     if(user.id === id){
                         return null;
                     }

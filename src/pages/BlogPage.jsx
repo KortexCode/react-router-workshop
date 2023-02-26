@@ -1,13 +1,10 @@
 import React from "react";
-import { useLoaderData } from "react-router-dom";
-import { BlogLinks } from "../components/BlogLinks";
 
-function BlogPage(){
-    const user = useLoaderData();
+function BlogPage(props){
     return(
         <>
             <p className="text-center">Soy BlogPage</p>
-            <BlogLinks userData={user}/>
+            {props.children}
         </>
     )
 }

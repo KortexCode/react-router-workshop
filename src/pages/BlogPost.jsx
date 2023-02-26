@@ -1,30 +1,28 @@
 import { useParams} from "react-router-dom";
 import { useLoaderData, useNavigate } from "react-router-dom";
-import { useAuth } from "../components/auth";
 
-function BlogPost(){
-    const auth = useAuth();//Contexto
+function BlogPost(props){
     const navigation = useNavigate(); //hook para la navegación
     const user = useLoaderData(); //Cargar datos de una API
     /* const {slug} = useParams();  //hook para traer el parámetro slug dela url
     const user = data.find(user => user.id == slug)
  */
     //buscando si el usuario pertenece a un rol
-    const userAuthorize = auth.rolesList.find((user)=>{
+    const userAuthorize = props.rolesList.find((user)=>{
        return user.name.find((name)=>{
-            return auth.username === name;
+            return props.username === name;
        });
     })
     //buscando permisos especiales si es un autor
     const authorName = userAuthorize?.name.find(author =>{
-        return author === auth.username;
+        return author === props.username;
     })
     //HandleEvent
     const goBack = ()=>{
         navigation("/blog");
     }
     const handleDeletePost = ()=>{
-        auth.activedDelete(user.id);
+        props.activedDelete(user.id);
     }
     return(
         <div className="container mt-4">

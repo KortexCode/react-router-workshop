@@ -35,18 +35,16 @@ const routes = [
     },
 ];
 
-function Menu(){
-
-    const auth = useAuth();
+function Menu(props){
 
     return(
         <nav className="container-fluid mt-2">
             <ul className="row">
                 {routes.map((route)=>{
-                    if(!auth.username && route.private){
+                    if(!props.username && route.private){
                         return null;
                     }
-                    if(route.to === "/login" && auth.username){
+                    if(route.to === "/login" && props.username){
                         return null;
                     }
                     return (<li className="col list-unstyled text-center" key={route.id} >
