@@ -14,10 +14,13 @@ const rolesList = [
 
 const AuthContext = React.createContext();
 
-function AuthProvider(){
+function AuthProvider(props){
     const [username, setUsername] = React.useState(null);
+    const [activedDeletePost, setActivedDeletePost] = React.useState(false);
+    const [idToDelete, setIdToDelete] = React.useState(null);
     const navigate = useNavigate();
    
+    console.log("el estado", props.stateTest)
     const login = (inputText)=>{
         setUsername(inputText);
         navigate("/profile");
@@ -27,7 +30,12 @@ function AuthProvider(){
         setUsername(null);
     
     }
-    const auth = {username, login, logout, rolesList};
+    const activedDelete = (id)=>{
+        navigate("/blog");
+        setActivedDeletePost(true);
+        setIdToDelete(id);
+    }
+    const auth = {username, login, logout, rolesList, activedDelete, activedDeletePost, idToDelete};
     return(
         <AuthContext.Provider value={auth}>
             <Outlet></Outlet>

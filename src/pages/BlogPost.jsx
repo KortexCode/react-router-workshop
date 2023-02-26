@@ -16,12 +16,15 @@ function BlogPost(){
        });
     })
     //buscando permisos especiales si es un autor
-    const authorName = userAuthorize.name.find(author =>{
+    const authorName = userAuthorize?.name.find(author =>{
         return author === auth.username;
     })
-
+    //HandleEvent
     const goBack = ()=>{
         navigation("/blog");
+    }
+    const handleDeletePost = ()=>{
+        auth.activedDelete(user.id);
     }
     return(
         <div className="container mt-4">
@@ -29,9 +32,9 @@ function BlogPost(){
             <p>Autor: {user.name}</p>
             <p>City: {user.address.city}</p>
             <p>Autor: {user.email}</p>
-            <p>Autor: {user.website}</p>
-            {userAuthorize.role === "admin" && <button>Delete Post</button>}
-            {authorName === user.name && <button>Delete Post</button>}
+            <p>Website: {user.website}</p>
+            {userAuthorize?.role === "admin" && <button onClick={handleDeletePost}>Delete Post</button>}
+            {authorName === user.name && <button onClick={handleDeletePost}>Delete Post</button>}
             <button onClick={goBack}>Volver atrás</button>
         </div>
     )

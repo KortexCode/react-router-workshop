@@ -5,7 +5,7 @@ import {
   RouterProvider,
 } from "react-router-dom";
 import { Layout } from './pages/Layout';
-import { AuthProvider, AuthRoute } from './components/auth';
+import { AuthProvider, AuthRoute} from './components/auth';
 import { HomePage } from './pages/HomePage';
 import { BlogPage } from './pages/BlogPage'; 
 import { ProfilePage } from './pages/ProfilePage';
@@ -15,57 +15,61 @@ import { BlogPost } from './pages/BlogPost';
 import { loaderBlogPost } from './pages/BlogPost';
 import { LonginPage } from './pages/LoginPage';
 import { LogoutPage } from './pages/LogoutPage';
+import { useAuth } from './hooks/useAuth';
 
-const router = createHashRouter([
-  { 
-    element: <AuthProvider/>,
-    children:[
-      {  
-        path: "/",
-        element:<Layout/>,
-        errorElement: <ErrorPage/>,
-        children:[  
-          {
-            index:true,
-            path: "/",
-            element:<HomePage className="container"/>,
-          },
-          {
-            path: "/login",
-            element:<LonginPage/>,
-          },
-          {
-            path: "/logout",
-            element:(
-            <AuthRoute>
-              <LogoutPage/>
-            </AuthRoute>),
-          },
-          {
-            path: "/profile",
-            element:(
-              <AuthRoute>
-                <ProfilePage/>
-              </AuthRoute>), 
-          },
-          {
-            path: "/blog",
-            element:<BlogPage/>,
-            loader:postLoader,
-          },
-          {
-            path: "/blog-post/:slug",
-            element:<BlogPost/>,
-            loader:loaderBlogPost,  
-          },
-        ]
-      } 
-    ]
-  },
-])
 
 function App() {
-  
+
+ /*  const {state} = useAuth(); */
+
+  const router = createHashRouter([
+    { 
+      element: <AuthProvider/>,
+      children:[
+        {  
+          path: "/",
+          element:<Layout/>,
+          errorElement: <ErrorPage/>,
+          children:[  
+            {
+              index:true,
+              path: "/",
+              element:<HomePage className="container"/>,
+            },
+            {
+              path: "/login",
+              element:<LonginPage/>,
+            },
+            {
+              path: "/logout",
+              element:(
+              <AuthRoute>
+                <LogoutPage/>
+              </AuthRoute>),
+            },
+            {
+              path: "/profile",
+              element:(
+                <AuthRoute>
+                  <ProfilePage/>
+                </AuthRoute>), 
+            },
+            {
+              path: "/blog",
+              element:<BlogPage/>,
+              loader:postLoader,
+            },
+            {
+              path: "/blog-post/:slug",
+              element:<BlogPost/>,
+              loader:loaderBlogPost,  
+            },
+          ]
+        } 
+      ]
+    },
+  ])
+
   return (
     <React.Fragment>
       <RouterProvider router={router}/>
