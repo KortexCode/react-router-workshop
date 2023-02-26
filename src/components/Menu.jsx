@@ -1,6 +1,5 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import {useAuth} from "./auth"
 //Se definen los valores de la ruta para cada navlink.
 const routes = [
     {

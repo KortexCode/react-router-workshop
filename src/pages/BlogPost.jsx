@@ -1,5 +1,6 @@
 import { useParams} from "react-router-dom";
 import { useLoaderData, useNavigate } from "react-router-dom";
+import { useAuth } from "../hooks/useAuth";
 
 function BlogPost(props){
     const navigation = useNavigate(); //hook para la navegación
@@ -21,9 +22,12 @@ function BlogPost(props){
     const goBack = ()=>{
         navigation("/blog");
     }
+    const id = user.id;
     const handleDeletePost = ()=>{
-        props.activedDelete(user.id);
+        props.activedDelete(id);
+        navigation("/blog");
     }
+    console.log("ENTRE3");
     return(
         <div className="container mt-4">
             <h1>Articulo</h1>

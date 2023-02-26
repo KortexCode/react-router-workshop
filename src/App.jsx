@@ -5,7 +5,7 @@ import {
   RouterProvider,
 } from "react-router-dom";
 import { Layout } from './pages/Layout';
-import { Menu } from "../components/Menu";
+import { Menu } from "./components/Menu";
 import { AuthRoute } from './components/AuthRoute';
 import { HomePage } from './pages/HomePage';
 import { BlogPage } from './pages/BlogPage'; 
@@ -65,21 +65,16 @@ function App() {
             </AuthRoute>), 
         },
         {
-          path: "/blog",
-          element:<BlogPage/>,
-          loader:postLoader,
-          children:[{
-            element:<BlogLinks activedDeletePost={activedDeletePost}
-            idToDelete={idToDelete}/>,
-            loader:postLoader,
-          }
-          ]
-        },
-        {
           path: "/blog-post/:slug",
           element:<BlogPost username={username} activedDelete={activedDelete}
           rolesList={rolesList}/>,
           loader:loaderBlogPost,  
+        },
+        {
+          path: "/blog",
+          element:
+          <BlogPage idToDelete={idToDelete} activedDeletePost={activedDeletePost}/>,
+          loader:postLoader,
         },
       ]
     } 

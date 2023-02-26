@@ -7,7 +7,7 @@ function Layout(props){
   
     return(
        <>
-        {props.childrens}
+        {props.children}
         {navigation.state === "loading" && <div className="alert alert-info my-5">Loading...</div>}
         <Outlet></Outlet>
        </>
