@@ -1,33 +1,34 @@
 import { useParams} from "react-router-dom";
-import { useLoaderData, useNavigate } from "react-router-dom";
-import { useAuth } from "../hooks/useAuth";
+import { useLoaderData, useNavigate, useOutletContext} from "react-router-dom";
 
-function BlogPost(props){
+function BlogPost(){
+    const [authData] = useOutletContext()
     const navigation = useNavigate(); //hook para la navegación
     const user = useLoaderData(); //Cargar datos de una API
     /* const {slug} = useParams();  //hook para traer el parámetro slug dela url
     const user = data.find(user => user.id == slug)
- */
-    //buscando si el usuario pertenece a un rol
-    const userAuthorize = props.rolesList.find((user)=>{
-       return user.name.find((name)=>{
-            return props.username === name;
-       });
-    })
-    //buscando permisos especiales si es un autor
-    const authorName = userAuthorize?.name.find(author =>{
-        return author === props.username;
-    })
+    */
+    const id = user.id;
     //HandleEvent
     const goBack = ()=>{
         navigation("/blog");
     }
-    const id = user.id;
     const handleDeletePost = ()=>{
-        props.activedDelete(id);
+        authData.setIdToDelete(id);
+        authData.setActivedDeletePost(true);
         navigation("/blog");
     }
-    console.log("ENTRE3");
+    //buscando si el usuario pertenece a un rol
+    const userAuthorize = authData.rolesList.find((user)=>{
+       return user.name.find((name)=>{
+            return authData.username === name;
+       });
+    })
+    //buscando permisos especiales si es un autor
+    const authorName = userAuthorize?.name.find(author =>{
+        return author === authData.username;
+    })
+    
     return(
         <div className="container mt-4">
             <h1>Articulo</h1>

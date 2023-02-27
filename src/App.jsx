@@ -17,28 +17,13 @@ import { BlogPost } from './pages/BlogPost';
 import { loaderBlogPost } from './pages/BlogPost';
 import { LonginPage } from './pages/LoginPage';
 import { LogoutPage } from './pages/LogoutPage';
-import { useAuth } from './hooks/useAuth';
-
 
 function App() {
 
-  const {
-    username,
-    activedDeletePost, 
-    idToDelete,
-    rolesList,
-    login,
-    logout,
-    activedDelete,
-  } = useAuth();
-
   const router = createHashRouter([
     {  
-      path: "/",
-      element:(
-      <Layout>
-        <Menu username={username} />
-      </Layout>),
+      path:"/",
+      element:<Layout/>,
       errorElement: <ErrorPage/>,
       children:[  
         {
@@ -48,33 +33,32 @@ function App() {
         },
         {
           path: "/login",
-          element:<LonginPage username={username} login={login}/>,
+          element:<LonginPage/>,
         },
         {
           path: "/logout",
           element:(
-          <AuthRoute username={username}>
-            <LogoutPage logout={logout}/>
+          <AuthRoute>
+            <LogoutPage/>
           </AuthRoute>),
-        },
-        {
-          path: "/profile",
-          element:(
-            <AuthRoute username={username}>
-              <ProfilePage username={username}/>
-            </AuthRoute>), 
-        },
-        {
-          path: "/blog-post/:slug",
-          element:<BlogPost username={username} activedDelete={activedDelete}
-          rolesList={rolesList}/>,
-          loader:loaderBlogPost,  
         },
         {
           path: "/blog",
           element:
-          <BlogPage idToDelete={idToDelete} activedDeletePost={activedDeletePost}/>,
+          <BlogPage/>,
           loader:postLoader,
+        },
+        {
+          path: "/profile",
+          element:(
+            <AuthRoute>
+              <ProfilePage/>
+            </AuthRoute>), 
+        },
+        {
+          path: "/blog-post/:slug",
+          element:<BlogPost/>,
+          loader:loaderBlogPost,  
         },
       ]
     } 

@@ -1,20 +1,21 @@
 import React from "react";
-import { Navigate, useNavigate} from "react-router-dom";
+import { Navigate, useNavigate, useOutletContext} from "react-router-dom";
 
-function LonginPage(props){
-    
+function LonginPage(){
+    const [authData] = useOutletContext()
     const [inputText, setInputText]  = React.useState("");
     const navigate = useNavigate();
     //Si ya ocurrió un login, se redireccionará a el home
-    if(props.username){
+    if(authData.username){
        return <Navigate to="/"></Navigate>
     }
+     //Manejador de evento en el cambio del input
     const handleTextChange = (event)=>{
         setInputText(event.target.value)
     }
     //Manejador de evento de click
     const handleLogin = ()=>{
-        props.login(inputText);
+        authData.login(inputText);
         navigate("/profile");
     }
     return(

@@ -1,8 +1,9 @@
 import React from "react";
-import {Navigate} from "react-router-dom";
+import {Navigate, useOutletContext} from "react-router-dom";
 
 function AuthRoute(props) {
-    if (!props.username){
+    const [authData] =useOutletContext()
+    if (!authData.username){
       return <Navigate to="/login" />
     }
     return props.children

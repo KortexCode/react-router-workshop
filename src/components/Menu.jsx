@@ -1,5 +1,6 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useOutletContext} from "react-router-dom";
+import { useAuth } from "../hooks/useAuth";
 //Se definen los valores de la ruta para cada navlink.
 const routes = [
     {
@@ -35,6 +36,9 @@ const routes = [
 ];
 
 function Menu(props){
+   /*  const [authData] = useOutletContext(); */
+   /* const [authData] = useAuth(); */
+   /* console.log("hola", authData) */
 
     return(
         <nav className="container-fluid mt-2">

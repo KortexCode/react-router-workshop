@@ -2,14 +2,12 @@ import React from "react";
 import { useLoaderData } from "react-router-dom";
 import { BlogLinks } from "../components/BlogLinks";
 
-function BlogPage(props){
+function BlogPage(){
     const user = useLoaderData()
-    console.log("ENTRE4");
-    
     return(
         <>
             <p className="text-center">Soy BlogPage</p>
-            <BlogLinks user={user} idToDelete={props.idToDelete} activedDeletePost={props.activedDeletePost}/>
+            <BlogLinks user={user}/>
         </>
     )
 }

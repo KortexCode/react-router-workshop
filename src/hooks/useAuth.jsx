@@ -1,24 +1,28 @@
 
 import React from "react";
 
+ //lista de roles
+ const rolesList = [
+    {
+        role:"admin",
+        name:["Homura", "Jotaro"],
+    },
+    {
+        role:"author",
+        name:["Ervin Howell", "Kurtis Weissnat"],
+    }
+]
+
 function useAuth(){
-    //lista de roles
-    const rolesList = [
-        {
-            role:"admin",
-            name:["Homura", "Jotaro"],
-        },
-        {
-            role:"author",
-            name:["Ervin Howell", "Kurtis Weissnat"],
-        }
-    ]
+   
     //Estados
     const [username, setUsername] = React.useState(null);
     const [activedDeletePost, setActivedDeletePost] = React.useState(false);
     const [idToDelete, setIdToDelete] = React.useState(null);
-    console.log("activedauth",activedDeletePost)
-    console.log("idenauth",idToDelete)
+
+    console.log("usuario", username);
+    console.log("activeborrado", activedDeletePost);
+
     //Acciones de autenticación
     const login = (inputText)=>{
         setUsername(inputText);
@@ -27,22 +31,20 @@ function useAuth(){
         setUsername(null);
     }
     //Acciones por autorización
-    const activedDelete = (id)=>{
-        console.log("ENTRE");
+    /*  const activedDelete = (id)=>{
         setActivedDeletePost(true);
-        setIdToDelete(id);
-        
+        setIdToDelete(id); 
     }
-
-    return {
-        username,
+    */
+    return [{ username,
         activedDeletePost, 
         rolesList,
         idToDelete,
         login,
         logout,
-        activedDelete,
-    }; 
+        setActivedDeletePost,
+        setIdToDelete,}]
+    
 }
 
 export {useAuth}

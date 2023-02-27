@@ -1,14 +1,14 @@
-import {Link} from "react-router-dom"
-import { useAuth } from "../hooks/useAuth";
+import {Link, useOutletContext} from "react-router-dom"
 
 function BlogLinks(props){
+
+    const [authData] = useOutletContext();
  
-    console.log("activedenlink", props.activedDeletePost)
     //Se hay una orden para borrar un post se busca el id de ese post 
     let id = null;
-    if(props.activedDeletePost){
+    if(authData.activedDeletePost){
        props.user.map(user =>{
-            if(user.id === props.idToDelete){
+            if(user.id === authData.idToDelete){
                 console.log(user.id)
                 id = user.id;
             }           
