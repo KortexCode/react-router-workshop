@@ -1,10 +1,11 @@
 import React from "react";
-import { Navigate, useNavigate, useOutletContext} from "react-router-dom";
+import { Navigate, useNavigate, useOutletContext, } from "react-router-dom";
 
-function LonginPage(){
-    const [authData] = useOutletContext()
+function LonginPage(props){
+    const [authData] = useOutletContext();
     const [inputText, setInputText]  = React.useState("");
     const navigate = useNavigate();
+    
     //Si ya ocurrió un login, se redireccionará a el home
     if(authData.username){
        return <Navigate to="/"></Navigate>
@@ -16,8 +17,9 @@ function LonginPage(){
     //Manejador de evento de click
     const handleLogin = ()=>{
         authData.login(inputText);
-        navigate("/profile");
+        navigate(authData.location);//Aquí navego usando el estado de location
     }
+   
     return(
         <div className="ps-2">
             <h1 className="text-center">LOGIN PAGE</h1>

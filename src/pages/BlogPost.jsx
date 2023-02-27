@@ -1,21 +1,24 @@
+import { useEffect } from "react";
 import { useParams} from "react-router-dom";
-import { useLoaderData, useNavigate, useOutletContext} from "react-router-dom";
+import { useLoaderData, useNavigate, useOutletContext, useLocation} from "react-router-dom";
 
 function BlogPost(){
     const [authData] = useOutletContext()
     const navigation = useNavigate(); //hook para la navegación
-    const user = useLoaderData(); //Cargar datos de una API
+    const user = useLoaderData();
+    const location = useLocation(); 
+    //Cargar datos de una API
     /* const {slug} = useParams();  //hook para traer el parámetro slug dela url
     const user = data.find(user => user.id == slug)
     */
+   
     const id = user.id;
     //HandleEvent
     const goBack = ()=>{
         navigation("/blog");
     }
     const handleDeletePost = ()=>{
-        authData.setIdToDelete(id);
-        authData.setActivedDeletePost(true);
+        authData.activedDelete(id);
         navigation("/blog");
     }
     //buscando si el usuario pertenece a un rol
@@ -28,6 +31,10 @@ function BlogPost(){
     const authorName = userAuthorize?.name.find(author =>{
         return author === authData.username;
     })
+    
+    useEffect(()=>{ 
+        authData.upDateLocation(location.pathname);
+    });
     
     return(
         <div className="container mt-4">

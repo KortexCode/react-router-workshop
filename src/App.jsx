@@ -1,17 +1,15 @@
 import React from 'react';
-import { HashRouter, Routes, Route } from 'react-router-dom';
+import { HashRouter, Routes, Route,} from 'react-router-dom';
 import {
   createHashRouter,
   RouterProvider,
 } from "react-router-dom";
 import { Layout } from './pages/Layout';
-import { Menu } from "./components/Menu";
 import { AuthRoute } from './components/AuthRoute';
 import { HomePage } from './pages/HomePage';
 import { BlogPage } from './pages/BlogPage'; 
 import { ProfilePage } from './pages/ProfilePage';
 import { ErrorPage } from './pages/ErrorPage';
-import { BlogLinks } from './components/BlogLinks';
 import { postLoader } from './pages/BlogPage';
 import { BlogPost } from './pages/BlogPost';
 import { loaderBlogPost } from './pages/BlogPost';
@@ -19,7 +17,7 @@ import { LonginPage } from './pages/LoginPage';
 import { LogoutPage } from './pages/LogoutPage';
 
 function App() {
-
+  
   const router = createHashRouter([
     {  
       path:"/",

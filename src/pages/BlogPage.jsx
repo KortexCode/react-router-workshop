@@ -1,9 +1,16 @@
-import React from "react";
-import { useLoaderData } from "react-router-dom";
+import React, { useEffect } from "react";
+import { useLoaderData, useLocation, useOutletContext } from "react-router-dom";
 import { BlogLinks } from "../components/BlogLinks";
 
 function BlogPage(){
     const user = useLoaderData()
+    const [authData] = useOutletContext();
+    const location = useLocation();
+
+    useEffect(()=>{
+        authData.upDateLocation(location.pathname);
+    });
+
     return(
         <>
             <p className="text-center">Soy BlogPage</p>

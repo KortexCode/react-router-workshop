@@ -19,9 +19,7 @@ function useAuth(){
     const [username, setUsername] = React.useState(null);
     const [activedDeletePost, setActivedDeletePost] = React.useState(false);
     const [idToDelete, setIdToDelete] = React.useState(null);
-
-    console.log("usuario", username);
-    console.log("activeborrado", activedDeletePost);
+    const [location, setLocation] = React.useState("");//aquí está
 
     //Acciones de autenticación
     const login = (inputText)=>{
@@ -31,19 +29,24 @@ function useAuth(){
         setUsername(null);
     }
     //Acciones por autorización
-    /*  const activedDelete = (id)=>{
+     const activedDelete = (id)=>{
         setActivedDeletePost(true);
         setIdToDelete(id); 
     }
-    */
+    const upDateLocation = (ref)=>{
+        setLocation(ref);
+    }
+   
     return [{ username,
         activedDeletePost, 
         rolesList,
         idToDelete,
+        location,
         login,
         logout,
-        setActivedDeletePost,
-        setIdToDelete,}]
+        activedDelete,
+        upDateLocation,
+    }]
     
 }
 

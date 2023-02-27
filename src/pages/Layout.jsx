@@ -1,10 +1,10 @@
 
 import React from "react";
 import { Menu } from "../components/Menu";
-import { Outlet, useNavigation } from "react-router-dom";
+import { Outlet, useNavigation, } from "react-router-dom";
 import { useAuth } from "../hooks/useAuth";
 
-function Layout(props){
+function Layout(){
     const [authData] = useAuth()
     const navigation = useNavigation();
   

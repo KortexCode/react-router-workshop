@@ -1,9 +1,14 @@
-import React from "react";
-import { useOutletContext } from "react-router-dom";
+import {React, useEffect}  from "react";
+import { useOutletContext, useLocation } from "react-router-dom";
 
 function HomePage(){
 
-    const [authData] = useOutletContext()
+    const [authData] = useOutletContext();
+    const location = useLocation();
+
+    useEffect(()=>{
+        authData.upDateLocation(location.pathname);
+    });
 
     console.log("estado", authData.activedDeletePost)
     return(

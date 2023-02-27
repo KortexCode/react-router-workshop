@@ -9,7 +9,6 @@ function BlogLinks(props){
     if(authData.activedDeletePost){
        props.user.map(user =>{
             if(user.id === authData.idToDelete){
-                console.log(user.id)
                 id = user.id;
             }           
         })

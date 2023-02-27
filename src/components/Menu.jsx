@@ -36,10 +36,7 @@ const routes = [
 ];
 
 function Menu(props){
-   /*  const [authData] = useOutletContext(); */
-   /* const [authData] = useAuth(); */
-   /* console.log("hola", authData) */
-
+  
     return(
         <nav className="container-fluid mt-2">
             <ul className="row">
