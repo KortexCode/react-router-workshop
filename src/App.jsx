@@ -47,7 +47,7 @@ function App() {
           loader:postLoader,
         },
         {
-          path: "/profile",
+          path: "/profile/:slug",
           element:(
             <AuthRoute>
               <ProfilePage/>

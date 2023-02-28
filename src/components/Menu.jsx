@@ -1,41 +1,41 @@
 import React from "react";
-import { Link, useOutletContext} from "react-router-dom";
-import { useAuth } from "../hooks/useAuth";
-//Se definen los valores de la ruta para cada navlink.
-const routes = [
-    {
-        text: "HomePage",
-        to:"/",
-        id:"home",
-        private: false,
-    },
-    {
-        text: "BlogPage",
-        to:"/blog",
-        id: "blog",
-        private: false,
-    },
-    {
-        text: "ProfilePage",
-        to:"/profile",
-        id:"profile",
-        private: true,
-    },
-    {
-        text: "LoginPage",
-        to:"/login",
-        id:"login",
-        private: false,
-    },
-    {
-        text: "LogoutPage",
-        to:"/logout",
-        id:"logout",
-        private: true,
-    },
-];
+import { Link } from "react-router-dom";
 
 function Menu(props){
+    const urlProfile = `/profile/${props.username}`
+    //Se definen los valores de la ruta para cada navlink.
+    const routes = [
+        {
+            text: "HomePage",
+            to:"/",
+            id:"home",
+            private: false,
+        },
+        {
+            text: "BlogPage",
+            to:"/blog",
+            id: "blog",
+            private: false,
+        },
+        {
+            text: "ProfilePage",
+            to:urlProfile,//aquí está
+            id:"profile",
+            private: true,
+        },
+        {
+            text: "LoginPage",
+            to:"/login",
+            id:"login",
+            private: false,
+        },
+        {
+            text: "LogoutPage",
+            to:"/logout",
+            id:"logout",
+            private: true,
+        },
+    ];
   
     return(
         <nav className="container-fluid mt-2">
@@ -56,21 +56,6 @@ function Menu(props){
             </ul>
         </nav>
     )
-    /*   return(
-          <nav>
-              <ul className="nav__ul">
-                  {routes.map((route)=>(
-                      <li key={route.id} >
-                          <NavLink to={route.to} 
-                              style={({isActive})=> (isActive ? activeStyle : inActiveStyle)}
-                          >
-                              {route.text}
-                          </NavLink>
-                      </li>
-                  ))}
-              </ul>
-          </nav>
-      ) */
 }
 
 export {Menu}
@@ -85,3 +70,18 @@ const inActiveStyle = {
     color: "blue",
     textDecoration: "none",
 }
+/*   return(
+      <nav>
+          <ul className="nav__ul">
+              {routes.map((route)=>(
+                  <li key={route.id} >
+                      <NavLink to={route.to} 
+                          style={({isActive})=> (isActive ? activeStyle : inActiveStyle)}
+                      >
+                          {route.text}
+                      </NavLink>
+                  </li>
+              ))}
+          </ul>
+      </nav>
+  ) */

@@ -5,7 +5,7 @@ import { Outlet, useNavigation, } from "react-router-dom";
 import { useAuth } from "../hooks/useAuth";
 
 function Layout(){
-    const [authData] = useAuth()
+    const [authData] = useAuth();//Aquí traigo el hook
     const navigation = useNavigation();
   
     return(

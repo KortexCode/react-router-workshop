@@ -16,11 +16,10 @@ import React from "react";
 function useAuth(){
    
     //Estados
-    const [username, setUsername] = React.useState(null);
+    const [username, setUsername] = React.useState(null); //Aquí está
     const [activedDeletePost, setActivedDeletePost] = React.useState(false);
     const [idToDelete, setIdToDelete] = React.useState(null);
-    const [location, setLocation] = React.useState("");//aquí está
-
+    const [location, setLocation] = React.useState("");
     //Acciones de autenticación
     const login = (inputText)=>{
         setUsername(inputText);
